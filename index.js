@@ -22,6 +22,7 @@ let server = http.createServer((req, res) => {
   // Get the query string as an object
   let queryStringObject = parsedUrl.query;
 
+  
   // Get the HTTP method
   let method = req.method.toLowerCase();
 
