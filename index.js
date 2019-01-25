@@ -29,7 +29,6 @@ let server = http.createServer((req, res) => {
   // Get the query string as an object
   let queryStringObject = parsedUrl.query;
 
-  
   // Get the HTTP method
   let method = req.method.toLowerCase();
 
@@ -82,7 +81,6 @@ server.listen(config.port, () => console.log("Server running on port: "+config.p
 
 // Define a request router
 let router = {
-  'sample': handlers.sample,
   'popularMovies': handlers.popularMovies,
   'latestMovies': handlers.latestMovies,
   'search': handlers.search,
