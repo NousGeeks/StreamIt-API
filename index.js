@@ -9,6 +9,13 @@ const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
 const config = require('./lib/config');
 const handlers = require('./lib/handlers');
+const _data = require('./lib/data');
+
+// TESTING
+// @TODO Delete later
+_data.delete('test','newFile',(err,data) => {
+  console.log("This was the error",err);
+});
 
 // The server should respond to all request with a string
 let server = http.createServer((req, res) => {
@@ -75,5 +82,11 @@ server.listen(config.port, () => console.log("Server running on port: "+config.p
 
 // Define a request router
 let router = {
-  'sample': handlers.sample
+  'sample': handlers.sample,
+  'popularMovies': handlers.popularMovies,
+  'latestMovies': handlers.latestMovies,
+  'search': handlers.search,
+  'categories': handlers.categories,
+  'movieDetails': handlers.movieDetails,
+  'genre': handlers.genre
 };
