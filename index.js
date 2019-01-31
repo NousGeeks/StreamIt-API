@@ -7,9 +7,13 @@
 const http = require('http');
 const url = require('url');
 const stringDecoder = require('string_decoder').StringDecoder;
-const config = require('./lib/config');
-const handlers = require('./lib/handlers');
-const _data = require('./lib/data');
+const db = require('mongodb').MongoClient;
+const Socket = require('socket.io');
+
+// Library dependencies
+const config = require("./lib/config");
+const handlers = require("./lib/handlers");
+const _data = require("./lib/data");
 
 // TESTING
 // @TODO Delete later
@@ -76,15 +80,20 @@ let server = http.createServer((req, res) => {
   });
 });
 
-// Strat server
-server.listen(config.port, () => console.log("Server running on port: "+config.port+" in "+config.envName+" mode"));
+// setting up socket.io server
+io = Socket(server);
+let socket = io('http://localhost:11303');
 
 // Define a request router
 let router = {
-  'popularMovies': handlers.popularMovies,
+  'cinema': handlers.cinema,
+  'genres': handlers.genre,
   'latestMovies': handlers.latestMovies,
-  'search': handlers.search,
-  'categories': handlers.categories,
+  'movies': handlers.movies,
   'movieDetails': handlers.movieDetails,
-  'genre': handlers.genre
+  'popularMovies': handlers.popularMovies,
+  'search': handlers.search
 };
+
+// Strat server
+server.listen(config.port, () => console.log("Server running on port: "+config.port+" in "+config.envName+" mode"));
